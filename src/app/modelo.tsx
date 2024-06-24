@@ -12,3 +12,5 @@ export interface Imagen {
     id: number,
     Perfil: number
 }
+
+export type Url = string;
