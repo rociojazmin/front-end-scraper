@@ -17,7 +17,7 @@ const Form: React.FC = () => {
       });
       setMensaje(respuesta.mensaje);
       setNombrePerfil(""); // Clear the input field after successful submission
-      window.location.reload(); // Refresh the page
+      window.location.reload(); // Refresh the page xq sino solo aparecia el msj "cargado con exito"
     } catch (error) {
       setMensaje("Error agregando perfil");
       console.error("Error:", error);
