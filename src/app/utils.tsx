@@ -1,4 +1,11 @@
-import { Perfil, Imagen, Url } from "./modelo";
+import {
+  Perfil,
+  Imagen,
+  Url,
+  ResultadoPerfil,
+  perfilNoEncontrado,
+  perfilEncontrado,
+} from "./modelo";
 
 export async function api<T>(url: string): Promise<T> {
   const urlCompleta = `${process.env.NEXT_PUBLIC_URL_API}${url}`;
@@ -79,6 +86,23 @@ export const getProfiles = async (): Promise<Perfil[]> => {
   return api<Perfil[]>("/perfil");
 };
 
+export const getProfile = async (
+  profileId: number
+): Promise<ResultadoPerfil> => {
+  try {
+    const profiles = await getProfiles();
+    const profile = profiles.find((p) => p.id === profileId);
+    if (profile) {
+      return perfilEncontrado(profile);
+    } else {
+      return perfilNoEncontrado;
+    }
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    return perfilNoEncontrado;
+  }
+};
+
 export const getImagesUrlByProfile = async (
   profileId: number
 ): Promise<Url[]> => {
@@ -90,5 +114,9 @@ export const getLatestImageUrlByProfile = async (
   profileId: number
 ): Promise<Url> => {
   const urls = await getImagesUrlByProfile(profileId);
-  return urls[0];
+  if (urls.length > 0) {
+    return urls[urls.length - 1]; // Obtener la última URL del array
+  } else {
+    throw new Error("No images found for the given profile");
+  }
 };
