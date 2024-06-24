@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import { getImagesUrlByProfile } from "../app/utils";
 import { Url } from "@/app/modelo";
