@@ -6,6 +6,7 @@ import {
 } from "../app/utils";
 import { Url, ResultadoPerfil, perfilNoEncontrado } from "@/app/modelo";
 import Image from "next/image"; 
+import Link from "next/link"; 
 
 interface CardProps {
   profileId: number;
@@ -46,6 +47,7 @@ const CardProfile: React.FC<CardProps> = ({ profileId }) => {
         <div className="m-4">
           {profile.tipo === "exito" ? (
             <>
+             <Link href={`/${profileId}`}>
               <p className="max-w-xs">{profile.encontrado.nombre}</p>
               {url ? (
                 <div className="relative w-48 h-48">
@@ -59,6 +61,7 @@ const CardProfile: React.FC<CardProps> = ({ profileId }) => {
               ) : (
                 <div>Cargando imagen...</div>
               )}
+              </Link>
               <button
                 onClick={handleDelete}
                 className="absolute top-0 right-0 mt-2 mr-2"
