@@ -9,7 +9,6 @@ import Form from "@/components/form";
 
 const Grid: React.FC = () => {
   return (
-    <RootLayout>
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold">Hola stalker!</h1>
         <Form />
@@ -18,7 +17,6 @@ const Grid: React.FC = () => {
           Get started by editing <code>src/app/page.tsx</code>
         </p>
       </div>
-    </RootLayout>
   );
 };
 
