@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { getProfiles } from "../app/utils";
 import { Perfil } from "@/app/modelo";
-import CardHome from "./cardHome";
+import CardHome from "./cardProfile";
 
-const CardHomeContainer: React.FC = () => {
+const GridProfile: React.FC = () => {
   const [profiles, setProfiles] = useState<Perfil[]>([]);
 
   useEffect(() => {
@@ -29,4 +29,4 @@ const CardHomeContainer: React.FC = () => {
   );
 };
 
-export default CardHomeContainer;
+export default GridProfile;

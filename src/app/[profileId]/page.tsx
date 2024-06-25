@@ -1,13 +1,13 @@
 "use client";
 
-import Card from "@/components/card";
+import CardImage from "@/components/cardImage";
 import React from "react";
 
 const PaginaProfile: React.FC = ({ params }:any) => {
 
 
 
-  return <Card profileId={params.profileId}/>
+  return <CardImage profileId={params.profileId}/>
 
   
 };

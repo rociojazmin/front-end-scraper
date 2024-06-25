@@ -5,42 +5,36 @@ import {
   borrarPerfil,
 } from "../app/utils";
 import { Url, ResultadoPerfil, perfilNoEncontrado } from "@/app/modelo";
+import Image from "next/image"; 
 
 interface CardProps {
   profileId: number;
 }
 
-const CardHome: React.FC<CardProps> = ({ profileId }) => {
-  const [url, setUrl] = useState<Url>();
+const CardProfile: React.FC<CardProps> = ({ profileId }) => {
+  const [url, setUrl] = useState<string>(); // Cambiado Url a string porque 'getLatestImageUrlByProfile' probablemente devuelve un string
   const [profile, setProfile] = useState<ResultadoPerfil>(perfilNoEncontrado);
 
   useEffect(() => {
-    const fetchImages = async () => {
+    const fetchData = async () => {
       try {
-        const url = await getLatestImageUrlByProfile(profileId);
-        setUrl(url);
+        const imageUrl = await getLatestImageUrlByProfile(profileId);
+        setUrl(imageUrl);
+        
+        const fetchedProfile = await getProfile(profileId);
+        setProfile(fetchedProfile);
       } catch (error) {
-        console.error("Error fetching images:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
-    const fetchProfile = async () => {
-      try {
-        const profile = await getProfile(profileId);
-        setProfile(profile);
-      } catch (error) {
-        console.error("Error fetching profile:", error);
-      }
-    };
-
-    fetchProfile();
-    fetchImages();
+    fetchData();
   }, [profileId]);
 
   const handleDelete = async () => {
     try {
       await borrarPerfil({ id: profileId });
-      window.location.reload(); // Refresh the page after deletion
+      window.location.reload(); // Recargar la página después de la eliminación
     } catch (error) {
       console.error("Error deleting profile:", error);
     }
@@ -53,20 +47,32 @@ const CardHome: React.FC<CardProps> = ({ profileId }) => {
           {profile.tipo === "exito" ? (
             <>
               <p className="max-w-xs">{profile.encontrado.nombre}</p>
-              <img src={url} className="max-w-xs" alt="Profile" />
+              {url ? (
+                <div className="relative w-48 h-48">
+                  <Image
+                    src={url} // Utiliza la URL obtenida y almacenada en el estado
+                    layout="fill"
+                    objectFit="cover"
+                    alt="Profile"
+                  />
+                </div>
+              ) : (
+                <div>Cargando imagen...</div>
+              )}
               <button
                 onClick={handleDelete}
                 className="absolute top-0 right-0 mt-2 mr-2"
               >
-                <img
+                <Image
                   src="https://www.shutterstock.com/image-vector/cross-icon-simple-design-260nw-2187745095.jpg"
                   alt="Delete"
-                  className="w-6 h-6"
+                  width={24}
+                  height={24}
                 />
               </button>
             </>
           ) : (
-            "Cargando..."
+            <div>Cargando perfil...</div>
           )}
         </div>
       </div>
@@ -74,4 +80,4 @@ const CardHome: React.FC<CardProps> = ({ profileId }) => {
   );
 };
 
-export default CardHome;
+export default CardProfile;
