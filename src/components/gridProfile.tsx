@@ -1,8 +1,7 @@
-// cardHomeContainer.tsx
 import React, { useEffect, useState } from "react";
 import { getProfiles } from "../app/utils";
 import { Perfil } from "@/app/modelo";
-import CardHome from "./cardProfile";
+import CardProfile from "./cardProfile";
 
 const GridProfile: React.FC = () => {
   const [profiles, setProfiles] = useState<Perfil[]>([]);
@@ -23,7 +22,7 @@ const GridProfile: React.FC = () => {
   return (
     <div className="flex flex-wrap justify-center mt-8">
       {profiles.map((profile) => (
-        <CardHome key={profile.id} profileId={profile.id} />
+        <CardProfile key={profile.id} profileId={profile.id} />
       ))}
     </div>
   );

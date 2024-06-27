@@ -1,17 +1,16 @@
+// gridImage.tsx
 import React from "react";
-import CardImage, { CardProps } from "./cardImage";
+import CardImage from "./cardImage";
 
 interface GridProps {
-  cards: CardProps[];
+  profileId: number;
 }
 
-const GridImage: React.FC<GridProps> = ({ cards }) => {
+const GridImage: React.FC<GridProps> = ({ profileId }) => {
   return (
-    <div className="flex flex-wrap justify-center mt-8">
-      {cards.map((cardProps, index) => (
-        <CardImage key={index} {...cardProps} />
-      ))}
-    </div>
+    <section className="grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-3 lg:p-6">
+      <CardImage profileId={profileId} />
+    </section>
   );
 };
 

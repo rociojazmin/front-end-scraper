@@ -1,15 +1,12 @@
+// page.tsx dentro de [profileId]
 "use client";
 
-import CardImage from "@/components/cardImage";
+import GridImage from "@/components/gridImage"; 
 import React from "react";
 
-const PaginaProfile: React.FC = ({ params }:any) => {
-
-
-
-  return <CardImage profileId={params.profileId}/>
-
-  
+const ProfilePage: React.FC<{ params: { profileId: string } }> = ({ params }) => {
+  const profileId = parseInt(params.profileId, 10);
+  return <GridImage profileId={profileId} />;
 };
 
-export default PaginaProfile;
+export default ProfilePage;

@@ -24,9 +24,12 @@ const CardImage: React.FC<CardProps> = ({ profileId }) => {
   }, [profileId]);
 
   return (
-    <div className="m-4">
+    <div className="grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-3 lg:p-6">
       {urls.map((url, index) => (
-        <div key={index} className="m-4">
+        <div
+          key={index}
+          className="relative overflow-hidden transition-transform duration-300 ease-in-out rounded-lg shadow-lg group hover:shadow-xl hover:-translate-y-2"
+        >
           <Image
             src={url}
             alt={`Image ${index + 1}`}
