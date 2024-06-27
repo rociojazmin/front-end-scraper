@@ -64,7 +64,7 @@ const CardProfile: React.FC<CardProps> = ({ profileId }) => {
               </Link>
               <button
                 onClick={handleDelete}
-                className="absolute top-2 right-2 textgray-900 rounded-full p-2 focus:outline-none hover:text-red-500 hover:bg-gray-900"
+                className="absolute top-2 right-2 textgray-900 rounded-full p-2 focus:outline-none hover:text-white hover:bg-red-500"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
