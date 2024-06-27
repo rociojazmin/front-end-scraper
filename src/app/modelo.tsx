@@ -13,7 +13,7 @@ export interface Imagen {
   Perfil: number;
 }
 
-export type Url = string;
+// export type Url = string;
 
 export type Resultado<T> =
   | { tipo: "exito"; encontrado: T }

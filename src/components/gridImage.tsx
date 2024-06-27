@@ -8,8 +8,10 @@ interface GridProps {
 
 const GridImage: React.FC<GridProps> = ({ profileId }) => {
   return (
-    <section className="grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-3 lg:p-6">
-      <CardImage profileId={profileId} />
+    <section className="max-w-screen-xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4 lg:p-6">
+        <CardImage profileId={profileId} />
+      </div>
     </section>
   );
 };

@@ -1,7 +1,6 @@
 import {
   Perfil,
   Imagen,
-  Url,
   ResultadoPerfil,
   perfilNoEncontrado,
   perfilEncontrado,
@@ -86,37 +85,40 @@ export const getProfiles = async (): Promise<Perfil[]> => {
   return api<Perfil[]>("/perfil");
 };
 
-export const getProfile = async (
-  profileId: number
-): Promise<ResultadoPerfil> => {
+export const getProfile = async (profileId: number): Promise<ResultadoPerfil> => {
   try {
     const profiles = await getProfiles();
     const profile = profiles.find((p) => p.id === profileId);
     if (profile) {
       return perfilEncontrado(profile);
     } else {
-      return perfilNoEncontrado;
+      return perfilNoEncontrado; 
     }
   } catch (error) {
     console.error("Error fetching profile:", error);
-    return perfilNoEncontrado;
+    throw error; 
   }
 };
 
+
 export const getImagesUrlByProfile = async (
   profileId: number
-): Promise<Url[]> => {
+): Promise<string[]> => {
   const images: Imagen[] = await getImagesIdByProfile(profileId);
   return images.map((i) => `http://3.142.219.234/imagen/${i.id}`);
 };
 
-export const getLatestImageUrlByProfile = async (
-  profileId: number
-): Promise<Url> => {
-  const urls = await getImagesUrlByProfile(profileId);
-  if (urls.length > 0) {
-    return urls[urls.length - 1]; // Obtener la última URL del array
-  } else {
-    throw new Error("No images found for the given profile");
+export const getLatestImageUrlByProfile = async (profileId: number): Promise<string> => {
+  try {
+    const urls = await getImagesUrlByProfile(profileId);
+    if (urls.length > 0) {
+      return urls[urls.length - 1]; // Devuelve la última URL del array de imágenes
+    } else {
+      throw new Error("No images found for the given profile"); // Lanza un error si no se encuentran imágenes
+    }
+  } catch (error) {
+    console.error("Error fetching latest image URL:", error);
+    throw error; // Propaga el error para manejarlo en el componente que llama a getLatestImageUrlByProfile
   }
 };
+

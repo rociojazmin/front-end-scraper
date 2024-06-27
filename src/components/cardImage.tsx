@@ -1,14 +1,14 @@
+// cardImage.tsx
 import React, { useEffect, useState } from "react";
 import { getImagesUrlByProfile } from "../app/utils";
-import { Url } from "@/app/modelo";
 import Image from "next/image";
 
-export interface CardProps {
+interface CardProps {
   profileId: number;
 }
 
 const CardImage: React.FC<CardProps> = ({ profileId }) => {
-  const [urls, setUrls] = useState<Url[]>([]);
+  const [urls, setUrls] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -24,7 +24,7 @@ const CardImage: React.FC<CardProps> = ({ profileId }) => {
   }, [profileId]);
 
   return (
-    <div className="grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-3 lg:p-6">
+    <>
       {urls.map((url, index) => (
         <div
           key={index}
@@ -35,11 +35,11 @@ const CardImage: React.FC<CardProps> = ({ profileId }) => {
             alt={`Image ${index + 1}`}
             width={500}
             height={500}
-            className="max-w-xs"
+            className="w-full h-full object-cover"
           />
         </div>
       ))}
-    </div>
+    </>
   );
 };
 

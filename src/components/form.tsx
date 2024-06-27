@@ -25,25 +25,38 @@ const Form: React.FC = () => {
   };
 
   return (
-    <div className="form-container">
-      <form onSubmit={handleSubmit} className="form">
-        <div className="form-group">
-          <label htmlFor="nombrePerfil">Nombre del Perfil:</label>
-          <input
-            type="text"
-            id="nombrePerfil"
-            value={nombrePerfil}
-            onChange={handleInputChange}
-            className="form-input"
-            required
-          />
-        </div>
-        <button type="submit" className="form-button">
-          Agregar Perfil
-        </button>
-      </form>
-      {mensaje && <p className="form-message">{mensaje}</p>}
+<div className="max-w-lg w-full shadow-md rounded-lg overflow-hidden p-6">
+  <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="flex flex-row items-center">
+      <label htmlFor="nombrePerfil" className="place-content-center text-center text-base text-white flex-1">
+        Escribí el username de la persona a la querés stalkear ;)
+      </label>
     </div>
+    <div className="flex flex-row items-center mt-2">
+      <div className="text-white text-2xl">
+        @
+      </div>
+      <input
+        type="text"
+        id="nombrePerfil"
+        value={nombrePerfil}
+        onChange={handleInputChange}
+        placeholder="nombreusuario"
+        className="form-input ml-2 text-xl text-white bg-gray-900 border-2 rounded-full w-10 pl-3 mr-6 flex-1 py-2 border-gray-400 border-transparent focus:outline-none focus:border-blue-500"
+        required
+      />
+      <button
+        type="submit"
+        className="text-xl font-semibold bg-teal-600 hover:bg-teal-800 text-white py-2 px-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+      >
+        Agregar Perfil
+      </button>
+    </div>
+  </form>
+  {mensaje && <p className="text-sm mt-4 text-gray-600">{mensaje}</p>}
+</div>
+
+
   );
 };
 
